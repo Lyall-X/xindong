@@ -84,6 +84,7 @@ public class Player : MonoBehaviour {
 	                    break;
                     case "woman":
                         GameManager.Instance.womanList.Add(hit.collider.gameObject.GetComponent<woman>());
+                        Debug.LogError("1111");
                         break;
                 }
             }

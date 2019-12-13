@@ -62,7 +62,7 @@ public class MapManager : MonoBehaviour {
         {
             for (int y = 0; y < rows - 1; y++)
             {
-                if (getMapType(x, y) != nullfloor && getMapType(x, y) != outwall)
+                if (getMapType(x, y) != nullfloor && getMapType(x, y) != outwall && getMapType(x, y) != outpath)
                 {
                     positionList.Add(new Vector2(x, y));
                 }
