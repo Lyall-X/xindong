@@ -34,7 +34,6 @@ public class MapManager : MonoBehaviour {
     private List<Vector2> positionList = new List<Vector2>();
 
     private GameManager gameManager;
-    private string liuyue = "C:\\Users\\zzn\\Desktop\\xindong\\RoguelikeProject\\Assets\\Scripts\\map\\level";
 
     //地图文件
 
@@ -63,7 +62,7 @@ public class MapManager : MonoBehaviour {
         {
             for (int y = 0; y < rows - 1; y++)
             {
-                if (getMapType(x, y) != nullfloor && getMapType(x, y) != outwall)
+                if (getMapType(x, y) != nullfloor && getMapType(x, y) != outwall && getMapType(x, y) != outpath)
                 {
                     positionList.Add(new Vector2(x, y));
                 }
@@ -123,7 +122,7 @@ public class MapManager : MonoBehaviour {
         go4.transform.SetParent(mapHolder);
     }
     private int getMapType(int x, int y)
-    {   
+    {
         return mapType[y][x];
     }
 
