@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     private static GameManager _instance;
-
     public static GameManager Instance {
         get {
             return _instance;
@@ -20,6 +19,7 @@ public class GameManager : MonoBehaviour {
     [HideInInspector]public List<Enemy>  enemyList = new List<Enemy>();
     [HideInInspector]public bool isEnd = false;//是否得到终点
     private bool sleepStep = true;
+
     private Text foodText;
     private Text failText;
     private Image dayImage;
@@ -27,20 +27,16 @@ public class GameManager : MonoBehaviour {
     private Player player;
     public MapManager mapManager;
 
-
-
     void Awake() {
         _instance = this;
         DontDestroyOnLoad(gameObject);
-        InitGame();
-    }
-
-
-    void InitGame() {
         //初始化地图
         mapManager = GetComponent<MapManager>();
         mapManager.InitMap();
+    }
 
+    //改
+    public void InitGame() {
         //初始化UI
         foodText = GameObject.Find("FoodText").GetComponent<Text>();
         UpdateFoodText(0);
@@ -50,6 +46,7 @@ public class GameManager : MonoBehaviour {
         dayImage = GameObject.Find("DayImage").GetComponent<Image>();
         dayText = GameObject.Find("DayText").GetComponent<Text>();
         dayText.text = "Day " + level;
+       
         Invoke("HideBlack",1);
 
         //初始化参数
@@ -82,6 +79,7 @@ public class GameManager : MonoBehaviour {
             AudioManager.Instance.RandomPlay(dieClip);
         }
     }
+
     public void AddFood(int count) {
         food += count;
         UpdateFoodText(count);
@@ -106,12 +104,25 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void OnLevelWasLoaded(int sceneLevel) {
+    void OnLevelWasLoaded(int sceneLevel)
+    {
         level++;
-        InitGame();//初始化游戏
+
+        //改
+        //InitGame();//初始化游戏 
+        GameObject.Find("StartPanel").SetActive(false);
+        mapManager = GetComponent<MapManager>();
+        LoadStoryPanel(level);
     }
 
-    void HideBlack() {
+    //改
+    private void LoadStoryPanel(int level)
+    {
+       Instantiate(mapManager.storyPanels[level-1]).transform.SetParent(GameObject.Find("Canvas").transform, false);
+    }
+
+    private void HideBlack()
+    {
         dayImage.gameObject.SetActive(false);
     }
 }

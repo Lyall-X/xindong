@@ -11,6 +11,7 @@ public class MapManager : MonoBehaviour {
     public GameObject[] foodArray;
     public GameObject[] enemyArray;
     public GameObject exitPrefab;
+    public GameObject[] storyPanels;
 
     public GameObject womanPrefab;
     public GameObject outPathPrefab;
@@ -49,7 +50,7 @@ public class MapManager : MonoBehaviour {
         mapHolder = new GameObject("Map").transform;
         //加载策划配置
         mapType.Clear();
-        string[] mapArr = File.ReadAllLines("C:\\Users\\zzn\\Desktop\\RoguelikeProject\\Assets\\Scripts\\map\\level" + GameManager.Instance.level + ".txt");
+        string[] mapArr = File.ReadAllLines("D:\\Unity 3D\\Unity programe\\xindong\\RoguelikeProject\\Assets\\Scripts\\map\\level" + GameManager.Instance.level + ".txt");
         //string[] mapArr = File.ReadAllLines("C:\\Users\\zzn\\Desktop\\RoguelikeProject\\Assets\\Scripts\\map\\level1.txt");
         for (int x = 0; x < mapArr.Length; ++x)
         {
