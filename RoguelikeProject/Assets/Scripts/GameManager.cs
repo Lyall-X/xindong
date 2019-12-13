@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour {
     private Player player;
     public MapManager mapManager;
 
+    public woman womanPeople;
+    public GameObject friendPeople;
+
     void Awake() {
         _instance = this;
         DontDestroyOnLoad(gameObject);
@@ -103,18 +106,9 @@ public class GameManager : MonoBehaviour {
         }
         for(int i =0;i < womanList.Count;i++ )
         {
-            woman people = womanList[i];
-            if (people)
+            if (womanPeople)
             {
-                if (i == 0)
-                {
-                    people.Move(player.oldPos);
-                }
-                else
-                {
-                    people.Move(womanList[i - 1].transform.position);
-                }
-
+                womanPeople.Move(player.oldPos);
             }
         }
         //检测有没有到达终点
