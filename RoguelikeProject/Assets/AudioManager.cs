@@ -30,4 +30,19 @@ public class AudioManager : MonoBehaviour {
     public void StopBgMusic() {
         bgSource.Stop();
     }
+
+    public void PlayBgMusic(AudioClip audioClip)
+    {
+        if (bgSource.isPlaying)
+            bgSource.Stop();
+        bgSource.clip = audioClip;
+        bgSource.Play();
+    }
+    public void PlayEfxMusic(AudioClip audioClip)
+    {
+        if (efxSource.isPlaying)
+            efxSource.Stop();
+        efxSource.clip = audioClip;
+        efxSource.Play();
+    }
 }

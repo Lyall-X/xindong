@@ -15,6 +15,13 @@ public class Player : MonoBehaviour {
     public AudioClip fruit1Audio;
     public AudioClip fruit2Audio;
 
+    public AudioClip footAudio;
+    public AudioClip attckAudio;
+    public AudioClip fireAttckAudio;
+    public AudioClip dieAudio;
+    public AudioClip footAudio;
+
+
     private float restTimer = 0;
     [HideInInspector]public Vector2 targetPos = new Vector2(1,1);
     [HideInInspector] public Vector2 oldPos = new Vector2(1, 1);
