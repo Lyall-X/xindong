@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     public AudioClip dieClip;
 
     [HideInInspector]public List<Enemy>  enemyList = new List<Enemy>();
+    [HideInInspector] public List<woman> womanList = new List<woman>();
     [HideInInspector]public bool isEnd = false;//是否得到终点
     private bool sleepStep = true;
 
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour {
     public void InitGame()
     {
         mapManager.InitMap();
+        if (player && GameManager.Instance.mapManager)
+            player.targetPos = GameManager.Instance.mapManager.getplayerBorn(3);
 
         //初始化UI
         foodText = GameObject.Find("FoodText").GetComponent<Text>();
@@ -96,6 +99,22 @@ public class GameManager : MonoBehaviour {
                 enemy.Move();
             }
             sleepStep = true;
+        }
+        for(int i =0;i < womanList.Count;i++ )
+        {
+            woman people = womanList[i];
+            if (people)
+            {
+                if (i == 0)
+                {
+                    people.Move(player.oldPos);
+                }
+                else
+                {
+                    people.Move(womanList[i - 1].transform.position);
+                }
+
+            }
         }
         //检测有没有到达终点
         Vector2 exitvec = mapManager.getplayerBorn(4);

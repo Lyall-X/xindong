@@ -34,7 +34,6 @@ public class MapManager : MonoBehaviour {
     private List<Vector2> positionList = new List<Vector2>();
 
     private GameManager gameManager;
-    private string liuyue = "C:\\Users\\zzn\\Desktop\\xindong\\RoguelikeProject\\Assets\\Scripts\\map\\level";
 
     //地图文件
 
@@ -123,7 +122,7 @@ public class MapManager : MonoBehaviour {
         go4.transform.SetParent(mapHolder);
     }
     private int getMapType(int x, int y)
-    {   
+    {
         return mapType[y][x];
     }
 

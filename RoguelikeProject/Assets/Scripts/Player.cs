@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
 
     private float restTimer = 0;
     [HideInInspector]public Vector2 targetPos = new Vector2(1,1);
+    [HideInInspector] public Vector2 oldPos = new Vector2(1, 1);
     private Rigidbody2D rigidbody;
     private BoxCollider2D collider;
     private Animator animator;
@@ -28,7 +29,6 @@ public class Player : MonoBehaviour {
 	    collider = GetComponent<BoxCollider2D>();
 	    animator = GetComponent<Animator>();
 
-        targetPos = GameManager.Instance.mapManager.getplayerBorn(3);
     }
 	
 	// Update is called once per frame
@@ -37,11 +37,11 @@ public class Player : MonoBehaviour {
         rigidbody.MovePosition(Vector2.Lerp(transform.position, targetPos, smoothing * Time.deltaTime));
 
 	    if (GameManager.Instance.food <= 0 ||GameManager.Instance.isEnd==true ) return;
-
         restTimer += Time.deltaTime;
 	    if (restTimer < restTime) return;
+        oldPos = transform.position;
 
-	    float h = Input.GetAxisRaw("Horizontal");
+        float h = Input.GetAxisRaw("Horizontal");
 	    float v = Input.GetAxisRaw("Vertical");
 	    if (h > 0) {
 	        v = 0;
@@ -82,7 +82,10 @@ public class Player : MonoBehaviour {
                         break;
                     case "Enemy":
 	                    break;
-	            }
+                    case "woman":
+                        GameManager.Instance.womanList.Add(hit.collider.gameObject.GetComponent<woman>());
+                        break;
+                }
             }
             GameManager.Instance.OnPlayerMove();
 
