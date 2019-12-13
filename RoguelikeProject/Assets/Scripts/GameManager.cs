@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour {
             }
             foodText.text = str + "   Food:" + food;
         }
+        
     }
 
     public void ReduceFood(int count) {
