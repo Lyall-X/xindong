@@ -83,8 +83,8 @@ public class Player : MonoBehaviour {
                     case "Enemy":
 	                    break;
                     case "woman":
-                        GameManager.Instance.womanList.Add(hit.collider.gameObject.GetComponent<woman>());
-                        Debug.LogError("1111");
+                        if (!GameManager.Instance.womanPeople)
+                            GameManager.Instance.womanPeople = hit.collider.gameObject.GetComponent<woman>();
                         break;
                 }
             }
