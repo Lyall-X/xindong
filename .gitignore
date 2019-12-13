@@ -1,0 +1,9 @@
+*.suo
+
+*.csproj
+*.sln
+Library/
+Temp/
+Assets/StreamingAssets/     
+
+Assets/uLua/Source/LuaWrap/
