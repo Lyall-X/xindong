@@ -32,11 +32,13 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         //初始化地图
         mapManager = GetComponent<MapManager>();
-        mapManager.InitMap();
     }
 
     //改
-    public void InitGame() {
+    public void InitGame()
+    {
+        mapManager.InitMap();
+
         //初始化UI
         foodText = GameObject.Find("FoodText").GetComponent<Text>();
         UpdateFoodText(0);

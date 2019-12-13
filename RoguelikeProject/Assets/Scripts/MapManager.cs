@@ -34,23 +34,19 @@ public class MapManager : MonoBehaviour {
     private List<Vector2> positionList = new List<Vector2>();
 
     private GameManager gameManager;
+    private string liuyue = "C:\\Users\\zzn\\Desktop\\xindong\\RoguelikeProject\\Assets\\Scripts\\map\\level";
 
     //地图文件
 
     private List<int[]> mapType = new List<int[]>();
     // Update is called once per frame
-    void Update () {
-	
-	}
-
-    //初始化地图
-    public void InitMap()
+    private void Start()
     {
         gameManager = this.GetComponent<GameManager>();
         mapHolder = new GameObject("Map").transform;
         //加载策划配置
         mapType.Clear();
-        string[] mapArr = File.ReadAllLines("D:\\Unity 3D\\Unity programe\\xindong\\RoguelikeProject\\Assets\\Scripts\\map\\level" + GameManager.Instance.level + ".txt");
+        string[] mapArr = File.ReadAllLines(Application.dataPath + "/Scripts/map/level" + GameManager.Instance.level + ".txt");
         //string[] mapArr = File.ReadAllLines("C:\\Users\\zzn\\Desktop\\RoguelikeProject\\Assets\\Scripts\\map\\level1.txt");
         for (int x = 0; x < mapArr.Length; ++x)
         {
@@ -73,6 +69,16 @@ public class MapManager : MonoBehaviour {
                 }
             }
         }
+    }
+
+    void Update () {
+	
+	}
+
+    //初始化地图
+    public void InitMap()
+    {
+
         //下面是创建围墙和地板
         for (int x = 0; x < cols; x++) {
             for (int y = 0; y < rows; y++)
@@ -117,7 +123,7 @@ public class MapManager : MonoBehaviour {
         go4.transform.SetParent(mapHolder);
     }
     private int getMapType(int x, int y)
-    {
+    {   
         return mapType[y][x];
     }
 
