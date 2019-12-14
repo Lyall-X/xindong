@@ -12,9 +12,15 @@ public class MapManager : MonoBehaviour {
     public GameObject[] enemyArray;
     public GameObject exitPrefab;
     public GameObject[] storyPanels;
+    public GameObject outPathPrefab;
+
+    //草地
+    public GameObject[] glass_outWallArray;
+    public GameObject[] glass_floorArray;
+    public GameObject[] glass_wallArray;
+    public GameObject glass_outPathPrefab;
 
     public GameObject womanPrefab;
-    public GameObject outPathPrefab;
 
     public int rows=10;
     public int cols=10;
