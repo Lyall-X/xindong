@@ -93,16 +93,17 @@ public class MapManager : MonoBehaviour {
                     GameObject go =  GameObject.Instantiate(outWallArray[index], new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                     go.transform.SetParent(mapHolder);
                 }
-                //创建母亲
-                else if (getMapType(x, y) == woman)
-                {
-                    GameObject go = GameObject.Instantiate(womanPrefab, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(mapHolder);
-                }//创建不可穿越地形
+                //创建不可穿越地形
                 else if (getMapType(x, y) == outpath)
                 {
                     GameObject go = GameObject.Instantiate(outPathPrefab, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                     go.transform.SetParent(mapHolder);
+                }
+                //创建母亲
+                if (getMapType(x, y) == woman && !GameManager.Instance.isAdd)
+                {
+                    woman womanPeople = GameObject.FindGameObjectWithTag("woman").GetComponent<woman>();
+                    womanPeople.transform.position = new Vector3(x, y, 0);
                 }
             }
         }

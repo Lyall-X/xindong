@@ -42,6 +42,8 @@ public class woman : MonoBehaviour
                     break;
                 case "woman":
                     break;
+                case "Enemy":
+                    break;
             }
         }
     }
@@ -49,6 +51,11 @@ public class woman : MonoBehaviour
     public void Move(Vector3 pos)
     {
         targetPosition = pos;
+    }
+    public void TakeDamage(int lossFood)
+    {
+        GameManager.Instance.ReduceFood(lossFood);
+        animator.SetTrigger("Damage");
     }
 
 }
