@@ -19,8 +19,9 @@ public class Player : MonoBehaviour {
     public AudioClip attckAudio;
     public AudioClip fireAttckAudio;
     public AudioClip dieAudio;
-
-
+    public AudioClip footAudio;
+    public AudioClip eatSnowballAudio;
+    public AudioClip chopAudio;
     private float restTimer = 0;
     [HideInInspector]public Vector2 targetPos = new Vector2(1,1);
     [HideInInspector] public Vector2 oldPos = new Vector2(1, 1);
@@ -34,7 +35,6 @@ public class Player : MonoBehaviour {
 	    rigidbody = GetComponent < Rigidbody2D>();
 	    collider = GetComponent<BoxCollider2D>();
 	    animator = GetComponent<Animator>();
-
     }
 	
 	// Update is called once per frame
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
 	        collider.enabled = true;
 	        if (hit.transform == null) {
 	            targetPos += new Vector2(h, v);
-                AudioManager.Instance.RandomPlay(step1Audio,step2Audio);
+                AudioManager.Instance.RandomPlay(footAudio);
 	        }
 	        else {
 	            switch (hit.collider.tag) {
@@ -69,20 +69,20 @@ public class Player : MonoBehaviour {
 	                    break;
                     case "Wall":
                         animator.SetTrigger("Attack");
-                        AudioManager.Instance.RandomPlay(chop1Audio,chop2Audio);
+                        AudioManager.Instance.PlayEfxMusic(chopAudio,3);
                         hit.collider.SendMessage("TakeDamage");
 	                    break; 
                     case "Food":  
                         GameManager.Instance.AddFood(10);
                         targetPos += new Vector2(h, v);
-                        AudioManager.Instance.RandomPlay(step1Audio, step2Audio);
+                        AudioManager.Instance.RandomPlay(footAudio);
                         Destroy(hit.transform.gameObject);
-                        AudioManager.Instance.RandomPlay(fruit1Audio,fruit2Audio);
+                        AudioManager.Instance.RandomPlay(eatSnowballAudio);
                         break;
                     case "Soda":
                         GameManager.Instance.AddFood(20);
                         targetPos += new Vector2(h, v);
-                        AudioManager.Instance.RandomPlay(step1Audio, step2Audio);
+                        AudioManager.Instance.RandomPlay(footAudio);
                         Destroy(hit.transform.gameObject);
                         AudioManager.Instance.RandomPlay(soda1Audio,soda2Audio);
                         break;
