@@ -19,7 +19,6 @@ public class Player : MonoBehaviour {
     public AudioClip attckAudio;
     public AudioClip fireAttckAudio;
     public AudioClip dieAudio;
-    public AudioClip footAudio;
 
 
     private float restTimer = 0;
