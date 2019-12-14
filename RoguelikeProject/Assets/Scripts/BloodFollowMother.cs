@@ -10,19 +10,26 @@ public class BloodFollowMother : MonoBehaviour
 {
     private GameObject mother;
     private Image image;
+    private Button addMotherBlood;
 
     public Vector3 toScreen;
     public Vector3 offset;
+
+    private bool isvisibleBtn = false;
     private void Start()
     {
         mother = GameObject.FindGameObjectWithTag("woman");
         image = GetComponent<Image>();
-        //transform.position = Camera.main.ScreenToWorldPoint(mother.transform.position) + offset;
+        addMotherBlood = mother.GetComponentInChildren<Button>();
     }
     private void Update()
     {
         Vector3 player3DPosition = Camera.main.WorldToScreenPoint(mother.transform.position);
         transform.position = player3DPosition + offset;
+        if (isvisibleBtn && GameManager.Instance.isAdd)
+        {
+            addMotherBlood.transform.position = player3DPosition + new Vector3(0, -40, 0);
+        }
     }
     public void OnValueChange()
     {
@@ -40,4 +47,13 @@ public class BloodFollowMother : MonoBehaviour
             image.transform.localScale = new Vector3(1, 0.1f, 1);
         }
     }
+
+    public void setBtnVisible(bool type)
+    {
+        isvisibleBtn = type;
+        Vector3 player3DPosition = Camera.main.WorldToScreenPoint(mother.transform.position);
+        addMotherBlood.transform.position = player3DPosition + new Vector3(0, 1000, 0);
+    }
+
+
 }

@@ -155,6 +155,8 @@ public class MapManager : MonoBehaviour {
             Vector2 vec = getplayerBorn(player_born);
             if (vec.x == pos.x && vec.y == pos.y) continue;
             if (vec.x -1 == pos.x && vec.y == pos.y) continue;
+            Vector2 vec1 = getplayerBorn(woman);
+            if (vec1.x - 1 == pos.x && vec1.y == pos.y) continue;
             GameObject enemyPrefab = RandomPrefab(prefabs);
             GameObject go = Instantiate(enemyPrefab, pos, Quaternion.identity) as GameObject;
             go.transform.SetParent(mapHolder);

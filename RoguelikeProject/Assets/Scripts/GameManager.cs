@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     private static GameManager _instance;
-    public static GameManager Instance {
-        get {
+    public static GameManager Instance
+    {
+        get
+        {
             return _instance;
         }
     }
@@ -23,9 +26,9 @@ public class GameManager : MonoBehaviour {
     public AudioClip LevelClip;
     public AudioClip StoryClip;
 
-    [HideInInspector]public List<Enemy>  enemyList = new List<Enemy>();
+    [HideInInspector] public List<Enemy> enemyList = new List<Enemy>();
     [HideInInspector] public List<woman> womanList = new List<woman>();
-    [HideInInspector]public bool isEnd = false;//是否得到终点
+    [HideInInspector] public bool isEnd = false;//是否得到终点
     [HideInInspector] public bool isAdd = false;//是否添加老婆
     private bool sleepStep = true;
 
@@ -38,7 +41,8 @@ public class GameManager : MonoBehaviour {
 
     private woman womanPeople;
 
-    void Awake() {
+    void Awake()
+    {
         _instance = this;
         DontDestroyOnLoad(gameObject);
         //初始化地图
@@ -60,28 +64,34 @@ public class GameManager : MonoBehaviour {
             }
         }
         //初始化UI
-        UpdateFoodText(0);
+        UpdateFoodText();
         dayImage = GameObject.Find("DayImage").GetComponent<Image>();
         dayText = GameObject.Find("DayText").GetComponent<Text>();
         dayText.text = "Day " + level;
 
 
-        Invoke("HideBlack",1);
+        Invoke("HideBlack", 1);
 
         //初始化参数
         isEnd = false;
         enemyList.Clear();
+        setAddButtonVisible(false);
     }
 
-    void UpdateFoodText(int foodChange) {
+    void UpdateFoodText()
+    {
         player_blood = GameObject.FindGameObjectWithTag("blood");
         player_blood.GetComponent<BloodFollow>().OnValueChange();
+        mother_blood = GameObject.FindGameObjectWithTag("motherblood");
+        mother_blood.GetComponent<BloodFollowMother>().OnValueChange();
     }
 
-    public void ReduceFood(int count) {
+    public void ReduceFood(int count)
+    {
         food -= count;
-        UpdateFoodText(-count);
-        if (food <= 0) {
+        UpdateFoodText();
+        if (food <= 0)
+        {
             AudioManager.Instance.StopBgMusic();
             AudioManager.Instance.RandomPlay(dieClip);
         }
@@ -89,8 +99,7 @@ public class GameManager : MonoBehaviour {
     public void ReduceMotherFood(int count)
     {
         mother_food -= count;
-        mother_blood = GameObject.FindGameObjectWithTag("motherblood");
-        mother_blood.GetComponent<BloodFollowMother>().OnValueChange();
+        UpdateFoodText();
         if (mother_food <= 0)
         {
             AudioManager.Instance.RandomPlay(dieClip);
@@ -100,17 +109,27 @@ public class GameManager : MonoBehaviour {
 
     public void AddFood(int count)
     {
-        setAddButtonVisible(true);
+        setAddButtonVisible(false);
         food += count;
-        UpdateFoodText(count);
+        UpdateFoodText();
+    }
+    public void AddMontherFood(int count)
+    {
+        setAddButtonVisible(false);
+        mother_food += count;
+        UpdateFoodText();
     }
 
-    public void OnPlayerMove() {
-        if (sleepStep==true) {
+    public void OnPlayerMove()
+    {
+        if (sleepStep == true)
+        {
             sleepStep = false;
         }
-        else {
-            foreach (var enemy in enemyList) {
+        else
+        {
+            foreach (var enemy in enemyList)
+            {
                 enemy.Move();
             }
             sleepStep = true;
@@ -121,10 +140,11 @@ public class GameManager : MonoBehaviour {
         }
         //检测有没有到达终点
         Vector2 exitvec = mapManager.getplayerBorn(4);
-        if (player.targetPos.x == exitvec.x && player.targetPos.y == exitvec.y) {
+        if (player.targetPos.x == exitvec.x && player.targetPos.y == exitvec.y)
+        {
             isEnd = true;
             //加载下一个关卡
-            Application.LoadLevel( Application.loadedLevel );//重新加载本关卡
+            Application.LoadLevel(Application.loadedLevel);//重新加载本关卡
         }
     }
 
@@ -150,11 +170,21 @@ public class GameManager : MonoBehaviour {
     {
         dayImage.gameObject.SetActive(false);
     }
-   
+
     //1 是主角 2是母亲
     public void setAddButtonVisible(bool type)
     {
-        //player.GetComponentInChildren<Button>().gameObject.SetActive(type);
-        //womanPeople.GetComponentInChildren<Button>().gameObject.SetActive(type);
+        mother_blood = GameObject.FindGameObjectWithTag("motherblood");
+        mother_blood.GetComponent<BloodFollowMother>().setBtnVisible(type);
+        if (type == true)
+        {
+            Vector3 player3DPosition = Camera.main.WorldToScreenPoint(player.transform.position);
+            player.GetComponentInChildren<Button>().gameObject.transform.position = player3DPosition + new Vector3(0, -40, 0);
+        }
+        else
+        {
+            player.GetComponentInChildren<Button>().gameObject.transform.position = new Vector3(0, 1000000, 0);
+        }
+
     }
 }
