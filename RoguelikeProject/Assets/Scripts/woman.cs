@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class woman : MonoBehaviour
 {
@@ -9,10 +10,13 @@ public class woman : MonoBehaviour
     private Rigidbody2D rigidbody;
 
     public float smoothing = 3;
-    public AudioClip BeattackAudio;
 
     private BoxCollider2D collider;
     private Animator animator;
+    public Button AddBtn;
+
+    public AudioClip footAudio;
+    public AudioClip eatSnowballAudio;
 
     void Start()
     {
@@ -22,6 +26,14 @@ public class woman : MonoBehaviour
         animator = GetComponent<Animator>();
         targetPosition = transform.position;
         GameManager.Instance.womanList.Add(this);
+        AddBtn.onClick.AddListener(OnAdd);
+    }
+    private void OnAdd()
+    {
+        GameManager.Instance.AddMontherFood(10);
+        AudioManager.Instance.RandomPlay(footAudio);
+        AudioManager.Instance.PlayEfxMusic(eatSnowballAudio);
+        GameManager.Instance.setAddButtonVisible(false);
     }
 
     void Update()
