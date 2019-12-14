@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
     public AudioClip attckAudio;
     public AudioClip eatSnowballAudio;
     public AudioClip chopAudio;
+    public AudioClip helpAudio;
 
     private float restTimer = 0;
     [HideInInspector]public Vector2 targetPos = new Vector2(1,1);
@@ -54,7 +55,8 @@ public class Player : MonoBehaviour {
 	    if (h != 0 || v != 0) {
             GameManager.Instance.ReduceFood(1);
             //检测
-	        collider.enabled = false;
+            GameManager.Instance.setAddButtonVisible(false);
+            collider.enabled = false;
 	        RaycastHit2D hit = Physics2D.Linecast(targetPos, targetPos + new Vector2(h, v));
 	        collider.enabled = true;
 	        if (hit.transform == null) {
@@ -71,15 +73,15 @@ public class Player : MonoBehaviour {
                         hit.collider.SendMessage("TakeDamage");
 	                    break; 
                     case "Food":  
-                        GameManager.Instance.AddFood(10);
                         targetPos += new Vector2(h, v);
+                        GameManager.Instance.AddFood(10);
                         AudioManager.Instance.RandomPlay(footAudio);
                         Destroy(hit.transform.gameObject);
                         AudioManager.Instance.RandomPlay(eatSnowballAudio);
                         break;
                     case "Soda":
-                        GameManager.Instance.AddFood(20);
                         targetPos += new Vector2(h, v);
+                        GameManager.Instance.AddFood(20);
                         AudioManager.Instance.RandomPlay(footAudio);
                         Destroy(hit.transform.gameObject);
                         AudioManager.Instance.RandomPlay(soda1Audio,soda2Audio);
@@ -89,6 +91,7 @@ public class Player : MonoBehaviour {
                     case "woman":
                         if (!GameManager.Instance.isAdd)
                         {
+                            AudioManager.Instance.PlayEfxMusic(helpAudio, 1);
                             GameManager.Instance.isAdd = true;
                         }
                         break;
