@@ -179,11 +179,11 @@ public class GameManager : MonoBehaviour
         if (type == true)
         {
             Vector3 player3DPosition = Camera.main.WorldToScreenPoint(player.transform.position);
-            player.GetComponentInChildren<Button>().gameObject.transform.position = player3DPosition + new Vector3(0, -40, 0);
+            player.GetComponentInChildren<Button>().gameObject.transform.position = player3DPosition + new Vector3(0, -80, 0);
         }
         else
         {
-            player.GetComponentInChildren<Button>().gameObject.transform.position = new Vector3(0, 1000000, 0);
+            player.GetComponentInChildren<Button>().gameObject.transform.position = new Vector3(-100, -100, 0);
         }
 
     }
