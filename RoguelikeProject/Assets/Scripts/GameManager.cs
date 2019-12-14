@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
     private Text dayText;
     private Player player;
     public MapManager mapManager;
+    private GameObject player_blood;
 
     private woman womanPeople;
     public GameObject friendPeople;
@@ -87,7 +88,8 @@ public class GameManager : MonoBehaviour {
             }
             foodText.text = str + "   Food:" + food;
         }
-        
+        player_blood = GameObject.FindGameObjectWithTag("blood");
+        player_blood.GetComponent<BloodFollow>().OnValueChange();
     }
 
     public void ReduceFood(int count) {
