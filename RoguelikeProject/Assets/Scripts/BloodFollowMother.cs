@@ -2,17 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class BloodFollow : MonoBehaviour
+/// <summary>
+/// Create time
+/// Last revision date 
+/// </summary>
+public class BloodFollowMother : MonoBehaviour
 {
-    public Vector3 offset = new Vector3(0,0,0);
-    private GameObject player;
+    private GameObject mother;
     private Image image;
+
+    public Vector3 toScreen;
+    public Vector3 offset;
     private void Start()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
-        image = GetComponent<Image>();
-        transform.position += offset;
+        mother = GameObject.FindGameObjectWithTag("woman");
+        //transform.position = Camera.main.ScreenToWorldPoint(mother.transform.position) + offset;
+    }
+    private void Update()
+    {
+        Vector3 player3DPosition = Camera.main.WorldToScreenPoint(mother.transform.position);
+        transform.position = player3DPosition + offset;
     }
     public void OnValueChange(int number)
     {
