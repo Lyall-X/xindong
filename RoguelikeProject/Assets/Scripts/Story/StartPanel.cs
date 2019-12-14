@@ -14,49 +14,45 @@ public class StartPanel : MonoBehaviour
     public Image bgIma;
 
     public Image[] fireIma;
-    //相对位置
-    public Vector3 fireDownLeftPositon;
-    public Vector3 fireDownRightPositon;
 
     public float[] intervalTime;
-    public int currentTime = 0;
 
     public float timeCounter = 0;
-    //private Tween tween;
+
+    private int count = 0;
     private void Start()
     {
         startBtn.onClick.AddListener(OnStart);
         //播放CG音乐
         AudioManager.Instance.PlayBgMusic(GameManager.Instance.LevelClip);
+        //bgIma.transform.DOLocalMove(new Vector3(-26447, 0, 0), intervalTime[currentTime++]).SetEase(Ease.Linear);
 
-        //tween.SetAutoKill(false);
-        //tween = bgIma.transform.DOLocalMove(new Vector3(-5663, 0, 0), intervalTime[currentTime++]);
-        DOTween.defaultEaseType = Ease.InOutSine;
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(bgIma.transform.DOLocalMove(new Vector3(-5663, 0, 0), intervalTime[currentTime++]))
-            .Append(bgIma.transform.DOLocalMove(new Vector3(-8926, 0, 0), intervalTime[currentTime++]))
-            .Append(bgIma.transform.DOLocalMove(new Vector3(-10213, 0, 0), intervalTime[currentTime++])).OnComplete(Boom)
-            .Append(bgIma.transform.DOLocalMove(new Vector3(-13000, 0, 0), intervalTime[currentTime++]));
-                       
-    }
-
-    private void Boom()
-    {
-        Vector3 position;
-        for (int i = 0; i <= 6; i++)
-        {
-            position = fireIma[i].transform.localPosition;
-            if (i <= 2)
-            {
-                fireIma[i].transform.DOLocalMove(position + fireDownLeftPositon, 5f);
-            }
-            else
-            {
-                fireIma[i].transform.DOLocalMove(position + fireDownRightPositon, 7f);
-            }
-        }
+        sequence.Append(bgIma.transform.DOLocalMove(new Vector3(-26447, 0, 0), intervalTime[0]).SetEase(Ease.Linear))
+                .Join(fireIma[count++].transform.DOShakeRotation(1));
+        //    .Append(bgIma.transform.DOLocalMove(new Vector3(-8926, 0, 0), intervalTime[currentTime++]))
+        //    .Append(bgIma.transform.DOLocalMove(new Vector3(-10213, 0, 0), intervalTime[currentTime++])).OnComplete(Boom)
+        //    .Append(bgIma.transform.DOLocalMove(new Vector3(-13000, 0, 0), intervalTime[currentTime++]));
 
     }
+
+    //private void Boom()
+    //{
+    //    Vector3 position;
+    //    for (int i = 0; i <= 6; i++)
+    //    {
+    //        position = fireIma[i].transform.localPosition;
+    //        if (i <= 2)
+    //        {
+    //            fireIma[i].transform.DOLocalMove(position + fireDownLeftPositon, 5f);
+    //        }
+    //        else
+    //        {
+    //            fireIma[i].transform.DOLocalMove(position + fireDownRightPositon, 7f);
+    //        }
+    //    }
+
+    //}
     private void OnStart()
     {
         //Level声音
