@@ -68,7 +68,7 @@ public class woman : MonoBehaviour
     public void TakeDamage(int lossFood)
     {
         GameManager.Instance.ReduceMotherFood(lossFood);
-        animator.SetTrigger("Damage");
+        animator.SetTrigger("motherDamage");
     }
 
 }
