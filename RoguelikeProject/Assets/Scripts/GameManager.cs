@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public int level = 1;//当前关卡
     public int food = 100;
     public int mother_food = 100;
+    public string[] actName;
+    private int cout = 0;
     //特效音乐
     public AudioClip dieClip;
     //背景音乐

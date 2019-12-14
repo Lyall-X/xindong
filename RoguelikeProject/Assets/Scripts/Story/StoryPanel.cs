@@ -39,6 +39,7 @@ public class StoryPanel : MonoBehaviour
         currentTween = texts[0].DOText("", 0);
         DOTween.defaultAutoPlay = AutoPlay.None;
         currentTween.SetAutoKill(false);
+
         //获得gameManager
         gameManager = GameManager.Instance;
     }
