@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
 
     public int level = 1;//当前关卡
     public int food = 100;
+    //特效音乐
     public AudioClip dieClip;
 
     [HideInInspector]public List<Enemy>  enemyList = new List<Enemy>();

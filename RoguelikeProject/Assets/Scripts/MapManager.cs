@@ -53,7 +53,7 @@ public class MapManager : MonoBehaviour {
             mapType.Add(System.Array.ConvertAll<string, int>(sArray, s => int.Parse(s)));
         }
         mapType.Reverse();
-        ////创建地图坐标映射
+        //创建地图坐标映射
         rows = mapType.Count;
         cols = mapType[0].Length;
         Debug.Log("rows:" + rows + "  :cols: " + cols);
