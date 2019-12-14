@@ -12,14 +12,18 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public bool isAd { get; internal set; }
+
     public int level = 1;//当前关卡
     public int food = 100;
+    public int mother_food = 100;
     //特效音乐
     public AudioClip dieClip;
 
     [HideInInspector]public List<Enemy>  enemyList = new List<Enemy>();
     [HideInInspector] public List<woman> womanList = new List<woman>();
     [HideInInspector]public bool isEnd = false;//是否得到终点
+    [HideInInspector] public bool isAdd = false;//是否添加老婆
     private bool sleepStep = true;
 
     private Text foodText;
@@ -29,7 +33,7 @@ public class GameManager : MonoBehaviour {
     private Player player;
     public MapManager mapManager;
 
-    public woman womanPeople;
+    private woman womanPeople;
     public GameObject friendPeople;
 
     void Awake() {
@@ -43,15 +47,21 @@ public class GameManager : MonoBehaviour {
     public void InitGame()
     {
         mapManager.InitMap();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        womanPeople = GameObject.FindGameObjectWithTag("woman").GetComponent<woman>();
         if (player && GameManager.Instance.mapManager)
+        {
             player.targetPos = GameManager.Instance.mapManager.getplayerBorn(3);
-
+            if (isAdd)
+            {
+                womanPeople.transform.position = new Vector3(player.targetPos.x - 1, player.targetPos.y, 0);
+            }
+        }
         //初始化UI
         foodText = GameObject.Find("FoodText").GetComponent<Text>();
         UpdateFoodText(0);
         failText = GameObject.Find("FailText").GetComponent<Text>();
         failText.enabled = false;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         dayImage = GameObject.Find("DayImage").GetComponent<Image>();
         dayText = GameObject.Find("DayText").GetComponent<Text>();
         dayText.text = "Day " + level;
@@ -105,12 +115,9 @@ public class GameManager : MonoBehaviour {
             }
             sleepStep = true;
         }
-        for(int i =0;i < womanList.Count;i++ )
+        if (isAdd)
         {
-            if (womanPeople)
-            {
-                womanPeople.Move(player.oldPos);
-            }
+            womanPeople.Move(player.oldPos);
         }
         //检测有没有到达终点
         Vector2 exitvec = mapManager.getplayerBorn(4);

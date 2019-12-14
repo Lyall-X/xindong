@@ -87,8 +87,10 @@ public class Player : MonoBehaviour {
                     case "Enemy":
 	                    break;
                     case "woman":
-                        if (!GameManager.Instance.womanPeople)
-                            GameManager.Instance.womanPeople = hit.collider.gameObject.GetComponent<woman>();
+                        if (!GameManager.Instance.isAdd)
+                        {
+                            GameManager.Instance.isAdd = true;
+                        }
                         break;
                 }
             }
