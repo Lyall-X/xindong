@@ -41,6 +41,16 @@ public class MapManager : MonoBehaviour {
     // Update is called once per frame
     private void Start()
     {
+
+    }
+
+    void Update () {
+	
+	}
+
+    //初始化地图
+    public void InitMap()
+    {
         gameManager = this.GetComponent<GameManager>();
         mapHolder = new GameObject("Map").transform;
         //加载策划配置
@@ -68,15 +78,6 @@ public class MapManager : MonoBehaviour {
                 }
             }
         }
-    }
-
-    void Update () {
-	
-	}
-
-    //初始化地图
-    public void InitMap()
-    {
 
         //下面是创建围墙和地板
         for (int x = 0; x < cols; x++) {
@@ -88,6 +89,8 @@ public class MapManager : MonoBehaviour {
                     GameObject go = GameObject.Instantiate(floorArray[index], new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                     go.transform.SetParent(mapHolder);
                 }
+                Vector2 vec = getplayerBorn(player_born);
+                if (vec.x == x && vec.y == y) continue;
                 if (getMapType(x,y) == outwall) {
                     int index = Random.Range(0, outWallArray.Length);
                     GameObject go =  GameObject.Instantiate(outWallArray[index], new Vector3(x, y, 0), Quaternion.identity) as GameObject;
@@ -149,6 +152,9 @@ public class MapManager : MonoBehaviour {
         for (int i = 0; i < count; i++)
         {
             Vector2 pos = RandomPosition();
+            Vector2 vec = getplayerBorn(player_born);
+            if (vec.x == pos.x && vec.y == pos.y) continue;
+            if (vec.x -1 == pos.x && vec.y == pos.y) continue;
             GameObject enemyPrefab = RandomPrefab(prefabs);
             GameObject go = Instantiate(enemyPrefab, pos, Quaternion.identity) as GameObject;
             go.transform.SetParent(mapHolder);
