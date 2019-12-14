@@ -37,7 +37,8 @@ public class StoryPanel : MonoBehaviour
             }
             else
             {
-                gameManager.InitGame();               
+                gameManager.InitGame();
+                AudioManager.Instance.PlayBgMusic(GameManager.Instance.LevelClip);
                 gameObject.SetActive(false);
             }
         }

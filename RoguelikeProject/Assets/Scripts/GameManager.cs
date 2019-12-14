@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour {
     public int mother_food = 100;
     //特效音乐
     public AudioClip dieClip;
+    //背景音乐
+    public AudioClip LevelClip;
+    public AudioClip StoryClip;
 
     [HideInInspector]public List<Enemy>  enemyList = new List<Enemy>();
     [HideInInspector] public List<woman> womanList = new List<woman>();
@@ -139,7 +142,8 @@ public class GameManager : MonoBehaviour {
     //改
     private void LoadStoryPanel(int level)
     {
-       Instantiate(mapManager.storyPanels[level-1]).transform.SetParent(GameObject.Find("Canvas").transform, false);
+        Instantiate(mapManager.storyPanels[level-1]).transform.SetParent(GameObject.Find("Canvas").transform, false);
+        AudioManager.Instance.PlayBgMusic(StoryClip);
     }
 
     private void HideBlack()

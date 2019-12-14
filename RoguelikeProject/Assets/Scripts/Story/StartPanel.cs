@@ -9,9 +9,6 @@ using DG.Tweening;
 /// </summary>
 public class StartPanel : MonoBehaviour
 {   
-    public GameObject OpeningStroyPanel;
-    //背景音乐
-    public AudioClip levelClip;
 
     public Button startBtn;
     public Image bgIma;
@@ -29,7 +26,8 @@ public class StartPanel : MonoBehaviour
     private void Start()
     {
         startBtn.onClick.AddListener(OnStart);
-        AudioManager.Instance.PlayBgMusic(levelClip);
+        //播放CG音乐
+        AudioManager.Instance.PlayBgMusic(GameManager.Instance.LevelClip);
 
         //tween.SetAutoKill(false);
         //tween = bgIma.transform.DOLocalMove(new Vector3(-5663, 0, 0), intervalTime[currentTime++]);
@@ -39,9 +37,7 @@ public class StartPanel : MonoBehaviour
             .Append(bgIma.transform.DOLocalMove(new Vector3(-8926, 0, 0), intervalTime[currentTime++]))
             .Append(bgIma.transform.DOLocalMove(new Vector3(-10213, 0, 0), intervalTime[currentTime++])).OnComplete(Boom)
             .Append(bgIma.transform.DOLocalMove(new Vector3(-13000, 0, 0), intervalTime[currentTime++]));
-            
-            
-
+                       
     }
 
     private void Boom()
@@ -63,7 +59,9 @@ public class StartPanel : MonoBehaviour
     }
     private void OnStart()
     {
-        OpeningStroyPanel.SetActive(true);
+        //Level声音
+        GameManager.Instance.InitGame();     
+        AudioManager.Instance.PlayBgMusic(GameManager.Instance.LevelClip);
         gameObject.SetActive(false);
     }
 
@@ -72,7 +70,9 @@ public class StartPanel : MonoBehaviour
         timeCounter += Time.deltaTime;
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            GameManager.Instance.InitGame();
+            //Level声音
+            GameManager.Instance.InitGame();          
+            AudioManager.Instance.PlayBgMusic(GameManager.Instance.LevelClip);
             gameObject.SetActive(false);
         }
     }
