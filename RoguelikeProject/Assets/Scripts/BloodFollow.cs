@@ -14,8 +14,9 @@ public class BloodFollow : MonoBehaviour
         image = GetComponent<Image>();
         transform.position += offset;
     }
-    public void OnValueChange(int number)
+    public void OnValueChange()
     {
+        int number = GameManager.Instance.food;
         if (number <= 0)
         {
             image.transform.localScale = new Vector3(0, 0.1f, 1);
