@@ -53,9 +53,8 @@ public class StartPanel : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            //Level声音
-            GameManager.Instance.InitGame();          
             AudioManager.Instance.PlayBgMusic(GameManager.Instance.StoryClip);
+            OpeningStroyPanel.SetActive(true);
             gameObject.SetActive(false);
         }
         if (!sequence.IsPlaying())

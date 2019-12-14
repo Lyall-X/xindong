@@ -67,10 +67,10 @@ public class GameManager : MonoBehaviour
         }
         //初始化UI
         UpdateFoodText();
-        //dayImage = GameObject.Find("DayImage").GetComponent<Image>();
-        //dayText = GameObject.Find("DayText").GetComponent<Text>();
-        //dayText.text = "Day " + level;
-        //Invoke("HideBlack", 1);
+        dayImage = GameObject.Find("DayImage").GetComponent<Image>();
+        dayText = GameObject.Find("DayText").GetComponent<Text>();
+        dayText.text = actName[cout++];
+        Invoke("HideBlack", 1);
 
         //初始化参数
         isEnd = false;
@@ -154,9 +154,13 @@ public class GameManager : MonoBehaviour
 
         //改
         //InitGame();//初始化游戏 
-        GameObject.Find("StartPanel").SetActive(false);
+        if (GameObject.Find("StartPanel"))
+            GameObject.Find("StartPanel").SetActive(false);
+        else
+            return;
         mapManager = GetComponent<MapManager>();
         LoadStoryPanel(level);
+        
     }
 
     //改
