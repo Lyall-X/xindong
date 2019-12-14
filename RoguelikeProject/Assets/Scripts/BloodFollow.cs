@@ -10,7 +10,6 @@ public class BloodFollow : MonoBehaviour
     private Image image;
     private void Start()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
         image = GetComponent<Image>();
         transform.position += offset;
     }

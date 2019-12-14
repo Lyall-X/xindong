@@ -113,7 +113,8 @@ public class MapManager : MonoBehaviour {
         int wallCount = Random.Range(minCountWall, maxCountWall + 1);//障碍物的个数
         InstantiateItems(wallCount,wallArray);
         //创建食物 2 - level*2
-        int foodCount = Random.Range(2, gameManager.level*2 + 1);
+        //int foodCount = Random.Range(2, gameManager.level*2 + 1);
+        int foodCount = Random.Range(10, gameManager.level * 10 + 1);
         InstantiateItems(foodCount,foodArray);
         //创建敌人 // level/2
         int enemyCount = gameManager.level/2;

@@ -26,16 +26,14 @@ public class GameManager : MonoBehaviour {
     [HideInInspector] public bool isAdd = false;//是否添加老婆
     private bool sleepStep = true;
 
-    private Text foodText;
-    private Text failText;
     private Image dayImage;
     private Text dayText;
     private Player player;
     public MapManager mapManager;
     private GameObject player_blood;
+    private GameObject mother_blood;
 
     private woman womanPeople;
-    public GameObject friendPeople;
 
     void Awake() {
         _instance = this;
@@ -59,14 +57,12 @@ public class GameManager : MonoBehaviour {
             }
         }
         //初始化UI
-        foodText = GameObject.Find("FoodText").GetComponent<Text>();
         UpdateFoodText(0);
-        failText = GameObject.Find("FailText").GetComponent<Text>();
-        failText.enabled = false;
         dayImage = GameObject.Find("DayImage").GetComponent<Image>();
         dayText = GameObject.Find("DayText").GetComponent<Text>();
         dayText.text = "Day " + level;
-       
+
+
         Invoke("HideBlack",1);
 
         //初始化参数
@@ -75,19 +71,6 @@ public class GameManager : MonoBehaviour {
     }
 
     void UpdateFoodText(int foodChange) {
-        if (foodChange == 0) {
-            foodText.text = "Food:" + food;
-        }
-        else {
-            string str = "";
-            if (foodChange < 0) {
-                str = foodChange.ToString();
-            }
-            else {
-                str = "+" + foodChange;
-            }
-            foodText.text = str + "   Food:" + food;
-        }
         player_blood = GameObject.FindGameObjectWithTag("blood");
         player_blood.GetComponent<BloodFollow>().OnValueChange();
     }
@@ -96,13 +79,25 @@ public class GameManager : MonoBehaviour {
         food -= count;
         UpdateFoodText(-count);
         if (food <= 0) {
-            failText.enabled = true;
             AudioManager.Instance.StopBgMusic();
             AudioManager.Instance.RandomPlay(dieClip);
         }
     }
+    public void ReduceMotherFood(int count)
+    {
+        mother_food -= count;
+        mother_blood = GameObject.FindGameObjectWithTag("motherblood");
+        mother_blood.GetComponent<BloodFollowMother>().OnValueChange();
+        if (mother_food <= 0)
+        {
+            AudioManager.Instance.RandomPlay(dieClip);
+        }
+    }
 
-    public void AddFood(int count) {
+
+    public void AddFood(int count)
+    {
+        setAddButtonVisible(true);
         food += count;
         UpdateFoodText(count);
     }
@@ -150,5 +145,12 @@ public class GameManager : MonoBehaviour {
     private void HideBlack()
     {
         dayImage.gameObject.SetActive(false);
+    }
+   
+    //1 是主角 2是母亲
+    public void setAddButtonVisible(bool type)
+    {
+        //player.GetComponentInChildren<Button>().gameObject.SetActive(type);
+        //womanPeople.GetComponentInChildren<Button>().gameObject.SetActive(type);
     }
 }

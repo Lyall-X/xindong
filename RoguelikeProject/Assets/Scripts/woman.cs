@@ -51,10 +51,11 @@ public class woman : MonoBehaviour
     public void Move(Vector3 pos)
     {
         targetPosition = pos;
+        GameManager.Instance.ReduceMotherFood(1);
     }
     public void TakeDamage(int lossFood)
     {
-        GameManager.Instance.ReduceFood(lossFood);
+        GameManager.Instance.ReduceMotherFood(lossFood);
         animator.SetTrigger("Damage");
     }
 
