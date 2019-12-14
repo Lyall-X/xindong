@@ -9,27 +9,22 @@ using DG.Tweening;
 /// </summary>
 public class StartPanel : MonoBehaviour
 {   
-
-    public Button startBtn;
     public Image bgIma;
+    public GameObject OpeningStroyPanel;
 
     public Image[] fireIma;
-
     public float[] intervalTime;
 
-    public float timeCounter = 0;
-
-    private int count = 0;
+    Sequence sequence;
     private void Start()
     {
-        startBtn.onClick.AddListener(OnStart);
         //播放CG音乐
         AudioManager.Instance.PlayBgMusic(GameManager.Instance.LevelClip);
         //bgIma.transform.DOLocalMove(new Vector3(-26447, 0, 0), intervalTime[currentTime++]).SetEase(Ease.Linear);
 
-        Sequence sequence = DOTween.Sequence();
-        sequence.Append(bgIma.transform.DOLocalMove(new Vector3(-26447, 0, 0), intervalTime[0]).SetEase(Ease.Linear))
-                .Join(fireIma[count++].transform.DOShakeRotation(1));
+        sequence = DOTween.Sequence();
+        sequence.Append(bgIma.transform.DOLocalMove(new Vector3(-13224, 0, 0), intervalTime[0]).SetEase(Ease.Linear));
+        //        .Join(fireIma[count++].transform.DOShakeRotation(1));
         //    .Append(bgIma.transform.DOLocalMove(new Vector3(-8926, 0, 0), intervalTime[currentTime++]))
         //    .Append(bgIma.transform.DOLocalMove(new Vector3(-10213, 0, 0), intervalTime[currentTime++])).OnComplete(Boom)
         //    .Append(bgIma.transform.DOLocalMove(new Vector3(-13000, 0, 0), intervalTime[currentTime++]));
@@ -53,23 +48,25 @@ public class StartPanel : MonoBehaviour
     //    }
 
     //}
-    private void OnStart()
-    {
-        //Level声音
-        GameManager.Instance.InitGame();     
-        AudioManager.Instance.PlayBgMusic(GameManager.Instance.LevelClip);
-        gameObject.SetActive(false);
-    }
 
     private void Update()
     {
-        timeCounter += Time.deltaTime;
         if(Input.GetKeyDown(KeyCode.Space))
         {
             //Level声音
             GameManager.Instance.InitGame();          
-            AudioManager.Instance.PlayBgMusic(GameManager.Instance.LevelClip);
+            AudioManager.Instance.PlayBgMusic(GameManager.Instance.StoryClip);
             gameObject.SetActive(false);
         }
+        if (!sequence.IsPlaying())
+        {
+            bgIma.DOFade(0, 3).OnComplete(()=>
+            {
+                AudioManager.Instance.PlayBgMusic(GameManager.Instance.StoryClip);
+                OpeningStroyPanel.SetActive(true);
+                gameObject.SetActive(false);
+            });
+        }
+
     }
 }

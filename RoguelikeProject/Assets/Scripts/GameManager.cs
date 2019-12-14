@@ -65,12 +65,10 @@ public class GameManager : MonoBehaviour
         }
         //初始化UI
         UpdateFoodText();
-        dayImage = GameObject.Find("DayImage").GetComponent<Image>();
-        dayText = GameObject.Find("DayText").GetComponent<Text>();
-        dayText.text = "Day " + level;
-
-
-        Invoke("HideBlack", 1);
+        //dayImage = GameObject.Find("DayImage").GetComponent<Image>();
+        //dayText = GameObject.Find("DayText").GetComponent<Text>();
+        //dayText.text = "Day " + level;
+        //Invoke("HideBlack", 1);
 
         //初始化参数
         isEnd = false;

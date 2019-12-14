@@ -12,13 +12,29 @@ public class StoryPanel : MonoBehaviour
     public Text[] texts;
     public string[] strings;
     public float[] times;
+    public Font font;
 
-    public int currentCout = 0;
+    private int currentCout = 0;
     private Tween currentTween = null;
     private GameManager gameManager;
+    private Image bgIma;
+    private Image sonIma;
 
     private void Start()
     {
+        foreach (Text item in texts)
+        {
+            item.color = Color.white;
+            item.font = font;
+            item.fontSize = 30;
+        }
+
+        bgIma = GetComponent<Image>();
+        sonIma = bgIma.transform.GetChild(0).GetComponentInChildren<Image>();
+
+        bgIma.DOColor(new Color(0, 0, 0), 3).From();
+        sonIma.DOColor(new Color(0, 0, 0), 3).From();
+
         //DoTween初始化
         currentTween = texts[0].DOText("", 0);
         DOTween.defaultAutoPlay = AutoPlay.None;
@@ -33,7 +49,7 @@ public class StoryPanel : MonoBehaviour
             currentCout++;
             if (currentCout <= strings.Length)
             {
-                OnSession(texts[(currentCout - 1) % 2], strings[currentCout - 1], times[currentCout - 1]);
+                OnSession(texts[0], strings[currentCout - 1], times[currentCout - 1]);
             }
             else
             {
@@ -52,7 +68,8 @@ public class StoryPanel : MonoBehaviour
     /// <param name="time"></param>
     private void OnSession(Text text ,string Strings,float time)
     {
-        text.enabled = true;
+        text.transform.parent.gameObject.SetActive(true);
+        text.text = "";
         currentTween = text.DOText(Strings, time).OnComplete(()=>SessionComplete(text));
         currentTween.Play();
     }
@@ -63,7 +80,5 @@ public class StoryPanel : MonoBehaviour
     /// <param name="text"></param>
     private void SessionComplete(Text text)
     {
-        text.text = "";
-        text.enabled = false;
     }
 }
