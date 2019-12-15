@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour
         {
             foreach (var enemy in enemyList)
             {
+                if(enemy != null)
                 enemy.Move();
             }
             sleepStep = true;
@@ -183,7 +184,7 @@ public class GameManager : MonoBehaviour
         if (type == true)
         {
             Vector3 player3DPosition = Camera.main.WorldToScreenPoint(player.transform.position);
-            player.GetComponentInChildren<Button>().gameObject.transform.position = player3DPosition + new Vector3(0, -80, 0);
+            player.GetComponentInChildren<Button>().gameObject.transform.position = player3DPosition + new Vector3(60, 40, 20);
         }
         else
         {
@@ -192,8 +193,8 @@ public class GameManager : MonoBehaviour
 
     }
 
+
     public void ShowInteractPanel(GameObject gameObject)
     {
         Instantiate(mapManager.interactPanel).transform.SetParent(GameObject.Find("Canvas").transform, false);
-    }
-}
+    }}

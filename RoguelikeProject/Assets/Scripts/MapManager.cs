@@ -145,7 +145,7 @@ public class MapManager : MonoBehaviour {
         int foodCount = Random.Range(2, gameManager.level*2 + 1);
         InstantiateItems(foodCount,foodArray);
         //创建敌人 // level/2
-        int enemyCount = gameManager.level/2;
+        int enemyCount = gameManager.level;
         InstantiateItems(enemyCount,enemyArray);
         //创建出口
         GameObject go4 = Instantiate(exitPrefab, getplayerBorn(exit), Quaternion.identity) as GameObject;

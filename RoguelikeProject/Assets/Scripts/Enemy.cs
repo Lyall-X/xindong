@@ -28,7 +28,11 @@ public class Enemy : MonoBehaviour {
     void Update() {
          rigidbody.MovePosition( Vector2.Lerp(transform.position, targetPosition, smoothing*Time.deltaTime));
     }
-    
+    private void disObj()
+    {
+        Destroy(this.gameObject);
+    }
+
     public void Move() {
         Vector2 offset_player = player.position - transform.position;
         Vector2 offset_mother = mother.position - transform.position;
@@ -40,6 +44,12 @@ public class Enemy : MonoBehaviour {
                 player.SendMessage("TakeDamage",lossFood);
             else if (offset_mother.magnitude < 1.1f)
                 mother.SendMessage("TakeDamage", lossFood);
+
+            if (this.gameObject.tag == "Enemy1")
+            {
+                Invoke("disObj", 1);
+
+            }
         }
         else {
             double dis_player = System.Math.Pow(offset_player.x, 2.0) + System.Math.Pow(offset_player.y, 2.0);

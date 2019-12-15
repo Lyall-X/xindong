@@ -38,6 +38,8 @@ public class woman : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+            OnAdd();
         //检测
         collider.enabled = false;
         RaycastHit2D hit = Physics2D.Linecast(this.transform.position, targetPosition);
@@ -55,6 +57,7 @@ public class woman : MonoBehaviour
                 case "woman":
                     break;
                 case "Enemy":
+                case "Enemy1":
                     break;
             }
         }
