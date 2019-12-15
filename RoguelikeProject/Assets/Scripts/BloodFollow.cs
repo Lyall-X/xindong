@@ -22,7 +22,7 @@ public class BloodFollow : MonoBehaviour
         }
         else if (number <= 100)
         {
-            image.transform.localScale = new Vector3((float)GameManager.Instance.food / 100, 0.1f, 1);
+            image.transform.localScale = new Vector3((float)GameManager.Instance.food / 30, 0.1f, 1);
         }
         else
         {

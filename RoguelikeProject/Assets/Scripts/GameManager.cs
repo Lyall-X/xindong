@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
         UpdateFoodText();
         if (food <= 0)
         {
+        	ShowPanel(mapManager.losePanel);
             AudioManager.Instance.StopBgMusic();
             AudioManager.Instance.RandomPlay(dieClip);
         }
@@ -102,6 +103,7 @@ public class GameManager : MonoBehaviour
         UpdateFoodText();
         if (mother_food <= 0)
         {
+            ShowPanel(mapManager.losePanel);
             AudioManager.Instance.RandomPlay(dieClip);
         }
     }
@@ -147,7 +149,7 @@ public class GameManager : MonoBehaviour
             //加载下一个关卡
             if(level >= 6)
             {
-
+                ShowPanel(mapManager.winPanel);
                 return;
             }
             Application.LoadLevel(Application.loadedLevel);//重新加载本关卡

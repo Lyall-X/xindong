@@ -40,7 +40,7 @@ public class BloodFollowMother : MonoBehaviour
         }
         else if (number <= 100)
         {
-            image.transform.localScale = new Vector3((float)GameManager.Instance.mother_food / 100, 0.1f, 1);
+            image.transform.localScale = new Vector3((float)GameManager.Instance.mother_food / 30, 0.1f, 1);
         }
         else
         {
