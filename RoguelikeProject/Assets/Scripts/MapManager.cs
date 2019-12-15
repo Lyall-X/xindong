@@ -23,6 +23,10 @@ public class MapManager : MonoBehaviour {
 
     public GameObject womanPrefab;
 
+    //互动面板
+    public GameObject losePanel;
+    public GameObject winPanel;
+
     public int rows=10;
     public int cols=10;
 
@@ -225,4 +229,5 @@ public class MapManager : MonoBehaviour {
         return prefabs[index];
     }
 
+    
 }

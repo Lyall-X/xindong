@@ -14,6 +14,7 @@ public class StartPanel : MonoBehaviour
 
     public Image[] fireIma;
     public float[] intervalTime;
+    private int count = 0;
 
     Sequence sequence;
     private void Start()
@@ -23,8 +24,14 @@ public class StartPanel : MonoBehaviour
         //bgIma.transform.DOLocalMove(new Vector3(-26447, 0, 0), intervalTime[currentTime++]).SetEase(Ease.Linear);
 
         sequence = DOTween.Sequence();
-        sequence.Append(bgIma.transform.DOLocalMove(new Vector3(-13224, 0, 0), intervalTime[0]).SetEase(Ease.Linear));
-        //        .Join(fireIma[count++].transform.DOShakeRotation(1));
+        sequence.Append(bgIma.transform.DOLocalMove(new Vector3(-13224, 0, 0), intervalTime[0]).SetEase(Ease.Linear))
+                .Join(fireIma[count++].transform.DOShakePosition(intervalTime[0], 10))
+                .Join(fireIma[count++].transform.DOShakePosition(intervalTime[0], 10))
+                .Join(fireIma[count++].transform.DOShakePosition(intervalTime[0], 10))
+                .Join(fireIma[count++].transform.DOShakePosition(intervalTime[0], 10))
+                .Join(fireIma[count++].transform.DOShakePosition(intervalTime[0], 10))
+                .Join(fireIma[count++].transform.DOShakePosition(intervalTime[0], 10))
+                .Join(fireIma[count++].transform.DOShakePosition(intervalTime[0], 10));
         //    .Append(bgIma.transform.DOLocalMove(new Vector3(-8926, 0, 0), intervalTime[currentTime++]))
         //    .Append(bgIma.transform.DOLocalMove(new Vector3(-10213, 0, 0), intervalTime[currentTime++])).OnComplete(Boom)
         //    .Append(bgIma.transform.DOLocalMove(new Vector3(-13000, 0, 0), intervalTime[currentTime++]));

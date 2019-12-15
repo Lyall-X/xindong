@@ -198,4 +198,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-}
+
+    public void ShowPanel(GameObject gameObject)
+    {
+        Instantiate(gameObject).transform.SetParent(GameObject.Find("Canvas").transform, false);
+    }}
