@@ -80,6 +80,40 @@ public class MapManager : MonoBehaviour {
         {
             mapArr[i] = reader.ReadLine();
         }    
+        for(int i = 0; i < 11; i++)
+        {
+            for(int j =0;j< 12;j++)
+            {
+                if (GameManager.Instance.level <= 3)
+                {
+                    GameObject go = GameObject.Instantiate(glass_floorArray[2], new Vector3(i + 0.5f, j, 0), Quaternion.identity) as GameObject;
+                    go.transform.SetParent(mapHolder);
+                }
+                else
+                {
+                    GameObject go = GameObject.Instantiate(floorArray[2], new Vector3(i + 0.5f, j, 0), Quaternion.identity) as GameObject;
+                    go.transform.SetParent(mapHolder);
+                }
+
+            }
+        }
+        for (int i = 0; i < 12; i++)
+        {
+            for (int j = 0; j < 11; j++)
+            {
+                if (GameManager.Instance.level <= 3)
+                {
+                    GameObject go = GameObject.Instantiate(glass_floorArray[2], new Vector3(i, j + 0.5f, 0), Quaternion.identity) as GameObject;
+                    go.transform.SetParent(mapHolder);
+                }
+                else
+                {
+                    GameObject go = GameObject.Instantiate(floorArray[2], new Vector3(i, j + 0.5f, 0), Quaternion.identity) as GameObject;
+                    go.transform.SetParent(mapHolder);
+                }
+
+            }
+        }
         //string[] mapArr = File.ReadAllLines(Application.dataPath + "/Scripts/map/level" + GameManager.Instance.level + ".txt");
         ////string[] mapArr = File.ReadAllLines("C:\\Users\\zzn\\Desktop\\RoguelikeProject\\Assets\\Scripts\\map\\level1.txt");
         for (int x = 0; x < mapArr.Length; ++x)
