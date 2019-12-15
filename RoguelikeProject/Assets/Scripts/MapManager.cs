@@ -2,8 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 public class MapManager : MonoBehaviour {
+
+    public TextAsset[] configs;
 
     public GameObject[] outWallArray;
     public GameObject[] floorArray;
@@ -71,8 +74,14 @@ public class MapManager : MonoBehaviour {
         mapHolder = new GameObject("Map").transform;
         //加载策划配置
         mapType.Clear();
-        string[] mapArr = File.ReadAllLines(Application.dataPath + "/Scripts/map/level" + GameManager.Instance.level + ".txt");
-        //string[] mapArr = File.ReadAllLines("C:\\Users\\zzn\\Desktop\\RoguelikeProject\\Assets\\Scripts\\map\\level1.txt");
+        var reader = new StringReader(configs[GameManager.Instance.level - 1].text);
+        string[] mapArr = new string[12];
+        for (int i = 0; i < 12;i++)
+        {
+            mapArr[i] = reader.ReadLine();
+        }    
+        //string[] mapArr = File.ReadAllLines(Application.dataPath + "/Scripts/map/level" + GameManager.Instance.level + ".txt");
+        ////string[] mapArr = File.ReadAllLines("C:\\Users\\zzn\\Desktop\\RoguelikeProject\\Assets\\Scripts\\map\\level1.txt");
         for (int x = 0; x < mapArr.Length; ++x)
         {
             string[] sArray = mapArr[x].Split(',');
