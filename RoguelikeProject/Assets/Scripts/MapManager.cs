@@ -24,7 +24,8 @@ public class MapManager : MonoBehaviour {
     public GameObject womanPrefab;
 
     //互动面板
-    public GameObject interactPanel;
+    public GameObject losePanel;
+    public GameObject winPanel;
 
     public int rows=10;
     public int cols=10;

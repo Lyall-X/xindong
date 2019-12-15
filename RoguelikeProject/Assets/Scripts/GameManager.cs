@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ShowInteractPanel(GameObject gameObject)
+    public void ShowPanel(GameObject gameObject)
     {
-        Instantiate(mapManager.interactPanel).transform.SetParent(GameObject.Find("Canvas").transform, false);
+        Instantiate(gameObject).transform.SetParent(GameObject.Find("Canvas").transform, false);
     }}
