@@ -17,8 +17,6 @@ public class StoryPanel : MonoBehaviour
     private int currentCout = 0;
     private Tween currentTween = null;
     private GameManager gameManager;
-    private Image bgIma;
-    private Image sonIma;
 
     private void Start()
     {
@@ -28,12 +26,6 @@ public class StoryPanel : MonoBehaviour
             item.font = font;
             item.fontSize = 30;
         }
-
-        bgIma = GetComponent<Image>();
-        sonIma = bgIma.transform.GetChild(0).GetComponentInChildren<Image>();
-
-        bgIma.DOColor(new Color(0, 0, 0), 3).From();
-        sonIma.DOColor(new Color(0, 0, 0), 3).From();
 
         //DoTween初始化
         currentTween = texts[0].DOText("", 0);

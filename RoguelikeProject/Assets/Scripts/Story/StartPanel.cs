@@ -20,7 +20,7 @@ public class StartPanel : MonoBehaviour
     private void Start()
     {
         //播放CG音乐
-        AudioManager.Instance.PlayBgMusic(GameManager.Instance.LevelClip);
+        AudioManager.Instance.PlayBgMusic(GameManager.Instance.CG);
         //bgIma.transform.DOLocalMove(new Vector3(-26447, 0, 0), intervalTime[currentTime++]).SetEase(Ease.Linear);
 
         sequence = DOTween.Sequence();

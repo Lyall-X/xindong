@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     //背景音乐
     public AudioClip LevelClip;
     public AudioClip StoryClip;
+    public AudioClip CG;
 
     [HideInInspector] public List<Enemy> enemyList = new List<Enemy>();
     [HideInInspector] public List<woman> womanList = new List<woman>();
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     private Image dayImage;
     private Text dayText;
-    private Player player;
+    public Player player;
     public MapManager mapManager;
     private GameObject player_blood;
     private GameObject mother_blood;
@@ -203,5 +204,5 @@ public class GameManager : MonoBehaviour
 
     public void ShowPanel(GameObject gameObject)
     {
-        Instantiate(gameObject).transform.SetParent(GameObject.Find("Canvas").transform, false);
+        Instantiate(gameObject).transform.SetParent(GameObject.FindGameObjectWithTag("maincanvas").transform, false);
     }}

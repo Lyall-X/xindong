@@ -26,6 +26,10 @@ public class Enemy : MonoBehaviour {
     }
 
     void Update() {
+        if(this.gameObject.transform.position == GameManager.Instance.player.transform.position)
+        {
+            Invoke("disObj", 0.3f);
+        }
          rigidbody.MovePosition( Vector2.Lerp(transform.position, targetPosition, smoothing*Time.deltaTime));
     }
     private void disObj()
@@ -47,7 +51,7 @@ public class Enemy : MonoBehaviour {
 
             if (this.gameObject.tag == "Enemy1")
             {
-                Invoke("disObj", 1);
+                Invoke("disObj", 0.5f);
 
             }
         }

@@ -14,10 +14,6 @@ public class LosePanel : MonoBehaviour
     public float time;
     void Start()
     {
-        GetComponent<Image>().DOFade(0, 3).From().OnComplete(() =>
-         {
-             GetComponentInChildren<Text>().DOText(str, time);
-         }
-        );
+
     }
 }
