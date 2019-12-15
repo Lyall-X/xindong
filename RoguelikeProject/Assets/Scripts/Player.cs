@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+
         AddBtn.onClick.AddListener(OnAdd);
     }
     private void OnAdd()
@@ -51,7 +52,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.J))
+            OnAdd();
         rigidbody.MovePosition(Vector2.Lerp(transform.position, targetPos, smoothing * Time.deltaTime));
         if (GameManager.Instance.food <= 0 || GameManager.Instance.isEnd == true) return;
         restTimer += Time.deltaTime;
@@ -100,6 +102,7 @@ public class Player : MonoBehaviour
                         Destroy(hit.transform.gameObject);
                         break;
                     case "Enemy":
+                    case "Enemy1":
                         break;
                     case "woman":
                         if (!GameManager.Instance.isAdd)

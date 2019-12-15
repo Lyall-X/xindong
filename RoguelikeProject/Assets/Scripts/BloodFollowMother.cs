@@ -28,7 +28,7 @@ public class BloodFollowMother : MonoBehaviour
         transform.position = player3DPosition + offset;
         if (isvisibleBtn && GameManager.Instance.isAdd)
         {
-            addMotherBlood.transform.position = player3DPosition + new Vector3(0, -80, 0);
+            addMotherBlood.transform.position = player3DPosition + new Vector3(60, 40, 20);
         }
     }
     public void OnValueChange()
