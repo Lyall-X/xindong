@@ -14,7 +14,7 @@ public class Act5Panel : MonoBehaviour
     public float[] times;
     public Font font;
 
-    public bool nestSonSpeak = false;
+    public bool nestSonSpeak = true;
 
     private int currentCout = 0;
     private Tween currentTween = null;
@@ -42,12 +42,12 @@ public class Act5Panel : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !currentTween.IsPlaying())
         {
             currentCout++;
-            if (nestSonSpeak)
+            if (nestSonSpeak && currentCout!=1)
             {
                 texts[0].transform.parent.gameObject.SetActive(true);
                 texts[1].transform.parent.gameObject.SetActive(false);
             }
-            else
+            else if(!nestSonSpeak && currentCout != 1)
             {
                 texts[0].transform.parent.gameObject.SetActive(false);
                 texts[1].transform.parent.gameObject.SetActive(true);
@@ -56,24 +56,22 @@ public class Act5Panel : MonoBehaviour
             {
                 switch (currentCout)
                 {                  
-                    case 2:
-                    case 5:
-                    case 9:
-                    case 10:
+                    case 3:
+                    case 4:
+                    case 7:
+                    case 8:
                         OnSession(texts[0], strings[currentCout - 1], times[currentCout - 1]);
 
                         break;
                     case 1:
-                    case 3:
-                    case 4:
+                    case 2:
+                    case 5:
                     case 6:
-                    case 7:
-                    case 8:
-                    case 11:
+                    case 9:
                         OnSession(texts[1], strings[currentCout - 1], times[currentCout - 1]);
                         break;
                 }
-                if (currentCout + 1 == 2 || currentCout + 1 == 5 || currentCout + 1 == 9 || currentCout + 1 == 10)
+                if (currentCout + 1 == 4 || currentCout + 1 == 5 || currentCout + 1 == 9 || currentCout + 1 == 8)
                 {
                     nestSonSpeak = true;
                 }
