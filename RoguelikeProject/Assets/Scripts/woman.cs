@@ -30,7 +30,7 @@ public class woman : MonoBehaviour
     }
     private void OnAdd()
     {
-        GameManager.Instance.AddMontherFood(10);
+        GameManager.Instance.AddMontherFood(5);
         AudioManager.Instance.RandomPlay(footAudio);
         AudioManager.Instance.PlayEfxMusic(eatSnowballAudio);
         GameManager.Instance.setAddButtonVisible(false);

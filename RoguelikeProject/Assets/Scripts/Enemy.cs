@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour {
     private Rigidbody2D rigidbody;
     
     public float smoothing = 3;
-    public int lossFood = 10;
+    public int lossFood = 3;
     public AudioClip attackAudio;
 
     private BoxCollider2D collider;

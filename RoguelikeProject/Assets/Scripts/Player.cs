@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     }
     private void OnAdd()
     {
-        GameManager.Instance.AddFood(10);
+        GameManager.Instance.AddFood(5);
         AudioManager.Instance.RandomPlay(footAudio);
         AudioManager.Instance.PlayEfxMusic(eatSnowballAudio);
         GameManager.Instance.setAddButtonVisible(false);

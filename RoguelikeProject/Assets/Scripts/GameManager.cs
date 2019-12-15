@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     public bool isAd { get; internal set; }
 
     public int level = 1;//当前关卡
-    public int food = 100;
-    public int mother_food = 100;
+    public int food = 30;
+    public int mother_food = 30;
     public string[] actName;
     private int cout = 0;
     //特效音乐
@@ -145,6 +145,11 @@ public class GameManager : MonoBehaviour
         {
             isEnd = true;
             //加载下一个关卡
+            if(level >= 6)
+            {
+
+                return;
+            }
             Application.LoadLevel(Application.loadedLevel);//重新加载本关卡
         }
     }
