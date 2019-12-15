@@ -91,7 +91,6 @@ public class MapManager : MonoBehaviour {
         //创建地图坐标映射
         rows = mapType.Count;
         cols = mapType[0].Length;
-        Debug.Log("rows:" + rows + "  :cols: " + cols);
         positionList.Clear();
         for (int x = 0; x < cols - 1; x++)
         {
@@ -110,10 +109,10 @@ public class MapManager : MonoBehaviour {
             {
                 if (isCanGo(x, y))
                 {
-                    if(GameManager.Instance.level <=6)
-                        setItemList(x, y, floorArray);
-                    else
+                    if(GameManager.Instance.level <= 3)
                         setItemList(x, y, glass_floorArray);
+                    else
+                        setItemList(x, y, floorArray);
                 }
                 //创建母亲
                 if (getMapType(x, y) == woman && !GameManager.Instance.isAdd)
@@ -151,7 +150,6 @@ public class MapManager : MonoBehaviour {
         //创建障碍物
         int wallCount = Random.Range(minCountWall, maxCountWall + 1);//障碍物的个数
         InstantiateItems(wallCount,wallArray);
-        Debug.Log("------------------");
         //创建食物 2 - level*2
         int foodCount = Random.Range(gameManager.level + 2, gameManager.level*2 + 1);
         InstantiateItems(foodCount,foodArray);
